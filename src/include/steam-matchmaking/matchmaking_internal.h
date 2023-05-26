@@ -7,6 +7,9 @@
 
 #include <steam-api/steam_api.h>
 
+/// @defgroup MatchMaking
+/// @{
+
 typedef void* ISteamMatchmaking;
 typedef SteamId LobbySteamId;
 
@@ -33,6 +36,7 @@ typedef struct LobbyMatchList_t {
     uint32_t lobbyMatchCount;
 } LobbyMatchList_t;
 
+/// Response after trying to enter a room
 typedef enum EChatRoomEnterResponse {
     k_EChatReserved,
     k_EChatRoomEnterResponseSuccess,
@@ -56,13 +60,14 @@ typedef enum ELobbyType {
     k_ELobbyTypePrivateUnique,
 } ELobbyType;
 
+/// Compare operator for value
 typedef enum ELobbyComparison {
-    k_ELobbyComparisonEqualToOrLessThan = -2,
-    k_ELobbyComparisonLessThan = -1,
-    k_ELobbyComparisonEqual = 0,
-    k_ELobbyComparisonGreaterThan = 1,
-    k_ELobbyComparisonEqualToOrGreaterThan = 2,
-    k_ELobbyComparisonNotEqual = 3,
+    k_ELobbyComparisonEqualToOrLessThan = -2, ///< <=
+    k_ELobbyComparisonLessThan = -1, ///< <
+    k_ELobbyComparisonEqual = 0, ///< ==
+    k_ELobbyComparisonGreaterThan = 1, ///< `>`
+    k_ELobbyComparisonEqualToOrGreaterThan = 2, ///< >=
+    k_ELobbyComparisonNotEqual = 3, ///< !=
 } ELobbyComparison;
 
 typedef enum ELobbyDistanceFilter {
@@ -71,6 +76,8 @@ typedef enum ELobbyDistanceFilter {
     k_ELobbyDistanceFilterFar = 2,
     k_ELobbyDistanceFilterWorldwide = 3
 } ELobbyDistanceFilter;
+
+/// @}
 
 typedef ISteamMatchmaking*(S_CALLTYPE* SteamAPI_SteamMatchmaking_v009)(void);
 typedef SteamU64(S_CALLTYPE* SteamAPI_ISteamMatchmaking_JoinLobby)(ISteamMatchmaking* matchmaking,
@@ -87,8 +94,7 @@ typedef SteamAPICall_t(S_CALLTYPE* SteamAPI_ISteamMatchmaking_CreateLobby)(IStea
 typedef SteamBool(S_CALLTYPE* SteamAPI_ISteamMatchmaking_SetLobbyJoinable)(ISteamMatchmaking* matchmaking,
                                                                            LobbySteamId lobbyId, SteamBool joinable);
 typedef SteamBool(S_CALLTYPE* SteamAPI_ISteamMatchmaking_SetLobbyType)(ISteamMatchmaking* matchmaking,
-                                                                       LobbySteamId lobbyId,
-                                                                       ELobbyType lobbyType);
+                                                                       LobbySteamId lobbyId, ELobbyType lobbyType);
 
 typedef SteamBool(S_CALLTYPE* SteamAPI_ISteamMatchmaking_SetLobbyOwner)(ISteamMatchmaking* matchmaking,
                                                                         LobbySteamId lobbyId, SteamId userId);

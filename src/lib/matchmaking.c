@@ -13,6 +13,9 @@
         return -1;                                                                                                     \
     }
 
+/// @defgroup MatchMaking
+/// @{
+
 static int steamMatchmakingInitFunctions(SteamMatchMakingFunctions* self, Atheneum* atheneum)
 {
     BIND(SteamAPI_SteamMatchmaking_v009, createMatchmakingV009)
@@ -57,6 +60,10 @@ int steamMatchMakingInit(SteamMatchMaking* self, SteamApi* api)
 
     return 0;
 }
+
+/// @name Lobby Create, Join and Leave
+/// All lobby join, leave and create lobby
+/// @{
 
 static const char* chatRoomEnterResponse(EChatRoomEnterResponse response)
 {
@@ -151,6 +158,8 @@ static SteamInt callbackLobbyChatUpdateGetSize(void)
     return sizeof(LobbyChatUpdate_t);
 }
 
+
+
 int steamMatchMakingRegisterLobbyChatUpdateCallback(SteamMatchMaking* self, void* data,
                                                     SteamMatchMakingOnLobbyChatUpdateFn fn)
 {
@@ -195,9 +204,9 @@ int steamMatchMakingCreateLobby(SteamMatchMaking* self, ELobbyType eLobbyType, S
     return 0;
 }
 
+/// @}
 
-
-/// @name lobby_filter
+/// @name Filter
 /// All lobby filter
 /// @{
 
@@ -208,7 +217,6 @@ void steamMatchMakingAddRequestLobbyListFilterSlotsAvailable(SteamMatchMaking* s
 {
     self->functions.addRequestLobbyListFilterSlotsAvailable(self->matchmaking, minimumNumberOfSlotsFree);
 }
-
 
 /// Add filter for value to be close to
 /// @param self
@@ -226,7 +234,6 @@ void steamMatchMakingAddRequestLobbyListDistanceFilter(SteamMatchMaking* self, E
 {
     self->functions.addRequestLobbyListDistanceFilter(self->matchmaking, distance);
 }
-
 
 /// Add filter for a number comparison
 /// @param self
@@ -305,9 +312,7 @@ void steamMatchMakingRequestLobbyList(SteamMatchMaking* self)
 
 /// @}
 
-
-
-/// @name lobby_data
+/// @name Lobby Data
 /// All lobby data functions
 /// @{
 
@@ -378,8 +383,7 @@ bool steamMatchMakingGetLobbyDataByIndex(SteamMatchMaking* self, LobbySteamId lo
 
 /// @}
 
-
-/// @name lobby_state
+/// @name Lobby State
 /// All lobby state functions
 /// @{
 
@@ -423,3 +427,5 @@ SteamId steamMatchMakingGetLobbyOwner(SteamMatchMaking* self, LobbySteamId lobby
 {
     return self->functions.getLobbyOwner(self->matchmaking, lobbyId);
 }
+
+/// @}
