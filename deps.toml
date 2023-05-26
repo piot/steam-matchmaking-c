@@ -1,0 +1,16 @@
+depsversion = "0.0.0"
+
+name = "piot/steam-matchmaking-c"
+version = "0.0.0"
+
+[[dependencies]]
+name = "piot/steam-api-c"
+version = "*"
+
+[[dependencies]]
+name = "piot/atheneum"
+version = "*"
+
+[[dependencies]]
+name = "piot/clog"
+version = "*"
